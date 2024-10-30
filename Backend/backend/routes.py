@@ -10,11 +10,9 @@ def verify_user(email, password):
         return True
     return False
 
-@auth_bp.route('/login', methods=['POST', 'OPTIONS'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
-    if request.method == 'OPTIONS':  # Handling CORS preflight request
-        return jsonify({'message': 'CORS preflight check'}), 200
-    
+
     data = request.json
     email = data.get('email')
     password = data.get('password')

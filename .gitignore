@@ -1,0 +1,5 @@
+Middleware-node/node_modules/
+Middleware-node/dist/
+UI/node_modules
+
+.env

@@ -4,7 +4,7 @@ import { useAuthApi } from '../hooks/UseAuthAPIS';
 import { v4 as uuidv4 } from 'uuid';
 
 const Login: React.FC = () => {
-  const { login, signup } = useAuthApi();
+  const { login, signup, forgotPassword } = useAuthApi();
   const [isSignUp, setIsSignUp] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,6 +12,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
+ 
 
   const toggleSignUp = () => {
     setIsSignUp(!isSignUp);
@@ -21,6 +22,20 @@ const Login: React.FC = () => {
     setPassword('');
     setLocation('');
     setError('');
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError('Please enter your email to reset password.');
+      return;
+    }
+    setError('');
+    try {
+      const response = await forgotPassword(email);
+      alert(response.message || 'Password reset email sent successfully');
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -150,6 +165,7 @@ const Login: React.FC = () => {
             <div className="text-right">
               <button
                 type="button"
+                onClick={handleForgotPassword}
                 className="text-sm text-blue-600 hover:underline"
               >
                 Forgot Password?

@@ -32,17 +32,17 @@ export const useAuthApi = () => {
         throw new Error(error.response?.data.detail || "Sign-up failed");
       }
     };
-    // const forgotPassword = async (email : string) => {
-    //   try {
-    //     const response = await axios.post('http://localhost:5000/auth/request-password-reset', {
-    //       email,
-    //     });
-    //     return response.data;
-    //   }
-    //   catch (error: any) {
-    //     throw new Error(error.response?.data.detail || "Sign-up failed");
-    //   }
-    // };
+    const forgotPassword = async (email : string) => {
+      try {
+        const response = await axios.post(`${API_URL}/forgot-password`, {
+          email,
+        });
+        return response.data;
+      }
+      catch (error: any) {
+        throw new Error(error.response?.data.detail || "Sign-up failed");
+      }
+    };
   
-    return { login, signup};
+    return { login, signup, forgotPassword};
   };
